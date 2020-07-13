@@ -112,18 +112,22 @@ class APC:
         for i in range(6):
             self.child.send(APC_ESCAPE)
 
-    def reboot(self, outlet, secs):
+    def delay(self, outlet):
+        #if secs in range(5, 61):
+        cmd1 = 'olRbootTime %d 10' % outlet
+        self.sendnl(cmd1)
+        #else:
+            #print("Enter time delay in seconds between 5 and 60")
+            #raise SystemExit(1)
+
+    def reboot(self, outlet):
         (outlet, outlet_name) = self.get_outlet(outlet)
 
-        if secs in range(5, 61):
-            cmd1 = 'olRbootTime %d %d' %(outlet, secs)
-        else:
-            print("Enter time delay in seconds between 5 and 60")
-            raise SystemExit(1)
-        cmd2 = 'olReboot %d' %outlet
+        cmd = 'olReboot %d' %outlet
+        
+        self.delay(outlet)
 
-        self.sendnl(cmd1)
-        self.sendnl(cmd2)
+        self.sendnl(cmd)
 
         self.get_command_result()
 
@@ -207,7 +211,9 @@ def main():
                         help='Turn on an outlet')
     parser.add_argument('--get', action='store',
                         help='Get the status of an outlet. Enter number 1 to 8 or all')
-    args = parser.parse_args()
+
+    #args = parser.parse_args()
+    args, unknown = parser.parse_known_args()
 
     is_command_specified = (args.reboot or args.debug or args.on or args.off or args.get)
 
