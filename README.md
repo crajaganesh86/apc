@@ -4,7 +4,7 @@ For now, it is compatible with python 2.7. Will move it to python 3 soon.
 
 To view the help:
 =================
-
+```
 $ python apc.py -h
 usage: apc.py [-h] [--host HOST] [--user USER] [--password PASSWORD] [-v]
               [--quiet] [--debug] [--reboot REBOOT] [--off OFF] [--on ON]
@@ -24,10 +24,11 @@ optional arguments:
   --off OFF            Turn off an outlet
   --on ON              Turn on an outlet
   --get GET            Get the status of an outlet. Enter number 1 to 8 or all
+```
 
 To get the status of a single powet outlet:
 ===========================================
-
+```
 $ python apc.py --get 1
 Acquiring lock /tmp/apc.lock
 Connecting to APC @ 192.168.9.6
@@ -35,10 +36,11 @@ olStatus 1
 E000: Success
  1: Switch 2108B: On
 DISCONNECTED from 192.168.9.6
+```
 
 To get the status of all the outlets:
 =====================================
-
+```
 $ python apc.py --get all
 Acquiring lock /tmp/apc.lock
 Connecting to APC @ 192.168.9.6
@@ -56,3 +58,4 @@ E000: Success
 apc>olStatus all
 
 DISCONNECTED from 192.168.9.6
+```
